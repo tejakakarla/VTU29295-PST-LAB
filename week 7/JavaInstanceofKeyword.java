@@ -4,11 +4,12 @@
  * Platform: HackerRank
  *
  * Question:
- * Given a list of objects of different classes, count how many objects belong
- * to each of Student, Rockstar, and Hacker using the instanceof operator.
+ * Create objects of Student, Rockstar, and Hacker according to the input and
+ * use instanceof to count how many objects belong to each class.
  *
  * Solution:
- * Read N objects, test each object with instanceof, and maintain three counts.
+ * Store the objects as Object references. For every object, test it with
+ * instanceof and increment the corresponding counter.
  */
 
 import java.util.*;
@@ -21,15 +22,31 @@ public class JavaInstanceofKeyword {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int student = 0, rockstar = 0, hacker = 0;
+        ArrayList<Object> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             String type = sc.next();
             if (type.equals("Student")) {
-                student++;
+                list.add(new Student());
             } else if (type.equals("Rockstar")) {
-                rockstar++;
+                list.add(new Rockstar());
             } else if (type.equals("Hacker")) {
+                list.add(new Hacker());
+            }
+        }
+
+        int student = 0;
+        int rockstar = 0;
+        int hacker = 0;
+
+        for (Object obj : list) {
+            if (obj instanceof Student) {
+                student++;
+            }
+            if (obj instanceof Rockstar) {
+                rockstar++;
+            }
+            if (obj instanceof Hacker) {
                 hacker++;
             }
         }
@@ -38,7 +55,3 @@ public class JavaInstanceofKeyword {
         sc.close();
     }
 }
-
-/* HackerRank normally supplies the object list in the platform's stub.
- * The counting logic above represents the required instanceof classification.
- */
